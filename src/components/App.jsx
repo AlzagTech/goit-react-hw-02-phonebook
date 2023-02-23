@@ -62,8 +62,9 @@ export class App extends Component {
   render() {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
-    const contactsLength = visibleContacts.length;
-
+    const visibleContactsLength = visibleContacts.length;
+    const contactsLength = this.state.contacts.length;
+    // No results in your contacts
     return (
       <>
         <GlobalStyle />
@@ -76,6 +77,8 @@ export class App extends Component {
           <Filter value={filter} onChange={this.handleFilterChange} />
           {contactsLength === 0 ? (
             <p>You have no contacts yet...</p>
+          ) : visibleContactsLength === 0 ? (
+            <p>No results in your contacts...</p>
           ) : (
             <ContactsList
               contacts={visibleContacts}
