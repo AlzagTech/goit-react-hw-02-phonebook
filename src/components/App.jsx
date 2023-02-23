@@ -4,6 +4,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { GlobalStyle } from './GlobalStyle';
+import { Container } from './Container/Container';
 
 export class App extends Component {
   state = {
@@ -60,20 +61,28 @@ export class App extends Component {
 
   render() {
     const { filter } = this.state;
-
     const visibleContacts = this.getVisibleContacts();
+    const contactsLength = visibleContacts.length;
 
     return (
       <>
         <GlobalStyle />
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandle} />
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.handleFilterChange} />
-        <ContactsList
-          contacts={visibleContacts}
-          onRemoveContact={this.removeContact}
-        />
+        <Container>
+          <h1>Phonebook</h1>
+          <ContactForm onSubmit={this.formSubmitHandle} />
+        </Container>
+        <Container>
+          <h2>Contacts</h2>
+          <Filter value={filter} onChange={this.handleFilterChange} />
+          {contactsLength === 0 ? (
+            <p>You have no contacts yet...</p>
+          ) : (
+            <ContactsList
+              contacts={visibleContacts}
+              onRemoveContact={this.removeContact}
+            />
+          )}
+        </Container>
       </>
     );
   }

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Form, FormLabel, FormInput, FormBtn } from './ContactForm.styles';
 
 export class ContactForm extends Component {
   state = {
@@ -8,7 +9,6 @@ export class ContactForm extends Component {
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
-
     return this.setState({ [name]: value });
   };
 
@@ -17,6 +17,8 @@ export class ContactForm extends Component {
 
     this.props.onSubmit(this.state);
     this.resetForm();
+
+    event.target.lastChild.blur();
   };
 
   resetForm = () => {
@@ -25,10 +27,10 @@ export class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <Form onSubmit={this.handleFormSubmit}>
         <label htmlFor="name">
-          Name
-          <input
+          <FormLabel>Name</FormLabel>
+          <FormInput
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -40,8 +42,8 @@ export class ContactForm extends Component {
         </label>
 
         <label htmlFor="number">
-          Number
-          <input
+          <FormLabel>Number</FormLabel>
+          <FormInput
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -52,8 +54,8 @@ export class ContactForm extends Component {
           />
         </label>
 
-        <button type="submit">Add contact</button>
-      </form>
+        <FormBtn type="submit">Add contact</FormBtn>
+      </Form>
     );
   }
 }
