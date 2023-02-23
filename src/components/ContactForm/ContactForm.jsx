@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 export class ContactForm extends Component {
   state = {
@@ -7,7 +7,6 @@ export class ContactForm extends Component {
   };
 
   handleChange = event => {
-    // event.preventDefault();
     const { name, value } = event.currentTarget;
 
     return this.setState({ [name]: value });
@@ -29,7 +28,6 @@ export class ContactForm extends Component {
       <form onSubmit={this.handleFormSubmit}>
         <label htmlFor="name">
           Name
-          <br />
           <input
             type="text"
             name="name"
@@ -40,10 +38,9 @@ export class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label htmlFor="number">
           Number
-          <br />
           <input
             type="tel"
             name="number"
@@ -54,7 +51,7 @@ export class ContactForm extends Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <button type="submit">Add contact</button>
       </form>
     );
